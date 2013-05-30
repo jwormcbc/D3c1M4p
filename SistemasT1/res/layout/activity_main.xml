@@ -12,7 +12,7 @@
         android:id="@+id/tv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:text="tipo de red :" />
 
     <TextView
         android:id="@+id/tv2"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv1"
         android:layout_below="@+id/tv1"
-        android:text="@string/hello_world"
+        android:text="Gsm Signal Strength :  "
         android:textColor="#0000FF"
         android:textColorHint="#FF0000" />
 
@@ -30,6 +30,8 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv11"
         android:layout_alignParentBottom="true"
+        android:clickable="false"
+        android:focusable="false"
         android:text="CallOpenID" />
 
     <Button
@@ -42,18 +44,11 @@
         android:text="hilo.start"
         android:textColor="#00ff00" />
 
-    <ProgressBar
-        android:id="@+id/pb1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignLeft="@+id/button1" />
-
     <TextView
         android:id="@+id/uiState"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/pb1"
+        android:layout_above="@+id/button1"
         android:layout_alignLeft="@+id/button2"
         android:layout_marginBottom="14dp"
         android:text="detenido."
@@ -67,7 +62,7 @@
         android:layout_alignLeft="@+id/tv2"
         android:layout_below="@+id/tv2"
         android:layout_marginTop="26dp"
-        android:text="@string/hello_world" />
+        android:text="gsm bit ERR rate :" />
 
     <TextView
         android:id="@+id/tv4"
@@ -75,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv2"
         android:layout_below="@+id/tv3"
-        android:text="Small Text"
+        android:text="Descripcion :"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#0000FF" />
 
@@ -85,7 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv2"
         android:layout_below="@+id/tv4"
-        android:text="Small Text"
+        android:text="CDMA ec/io Db*10 :"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -94,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv2"
         android:layout_below="@+id/tv5"
-        android:text="Small Text"
+        android:text="RSSI CDMA dbm :"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#0000FF" />
 
@@ -104,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv2"
         android:layout_below="@+id/tv6"
-        android:text="Small Text"
+        android:text="Relacion Señal ruido EVDO (0-8) :"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -113,7 +108,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv2"
         android:layout_below="@+id/tv7"
-        android:text="Small Text"
+        android:text="EVDO ec/io :"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#0000FF" />
 
@@ -123,7 +118,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv2"
         android:layout_below="@+id/tv8"
-        android:text="Small Text"
+        android:text="EVDO dbm :"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -132,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv2"
         android:layout_below="@+id/tv9"
-        android:text="Small Text"
+        android:text="locacion ( CELL ) :"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="#0000FF" />
 
@@ -142,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv2"
         android:layout_below="@+id/tv10"
-        android:text="Small Text"
+        android:text="# Vecinos  :"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -151,45 +146,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tv2"
         android:layout_below="@+id/tv2"
-        android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/tvLon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/tvLat"
-        android:layout_alignTop="@+id/tvLat"
-        android:layout_marginTop="21dp"
-        android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/tvLat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/pb1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="45dp"
-        android:text="Small Text"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvLat"
-        android:layout_alignRight="@+id/button1"
-        android:text="Latitud"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvLon"
-        android:layout_alignRight="@+id/textView1"
-        android:text="Longitude"
+        android:text="dbm Signal Strength :"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <Button
@@ -200,5 +157,55 @@
         android:layout_alignBottom="@+id/button2"
         android:layout_toLeftOf="@+id/button2"
         android:text="DeciMap" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv11"
+        android:layout_below="@+id/tvLat"
+        android:text="Latitud"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvLat"
+        android:layout_alignBottom="@+id/tvLat"
+        android:layout_alignLeft="@+id/textView1"
+        android:text="Longitude"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvLat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv11"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/tvLon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvLat"
+        android:layout_centerHorizontal="true"
+        android:text=" "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/eTDB_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/uiState"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignRight="@+id/tvLon"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>

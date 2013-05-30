@@ -3,11 +3,13 @@ package com.example.sistemast1;
 import java.util.HashMap;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,14 +24,15 @@ public class DeciMap extends Activity {
   private GoogleMap map;
   SQLiteDatabase db ;
   DeciMapSQLiteHelper usdbh;
-  static final String DB_NAME="DeciMapDB",TABLE_NAME="GeoDBM";
+  String DB_NAME="DeciMapDB",TABLE_NAME="GeoDBM";
   HashMap<String,DBMpoint> hmDBM=new HashMap<String, DBMpoint>();
 	
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_deci_map);
-    
+    Intent sender=getIntent();
+    TABLE_NAME=sender.getExtras().getString("tabla");
     
     usdbh = new DeciMapSQLiteHelper(DeciMap.this,DB_NAME, null, 1); //nombre de la base de datos :)
 	db = usdbh.getWritableDatabase();
@@ -40,7 +43,7 @@ public class DeciMap extends Activity {
         .getMap();
     
     
-    
+    Toast.makeText(this, "Generando Consulta..." + TABLE_NAME,Toast.LENGTH_LONG).show();
     
     Cursor c=db.query(TABLE_NAME,null,null,null,null,null,null);
 	if(c.moveToFirst())
@@ -60,7 +63,8 @@ public class DeciMap extends Activity {
     
     
 	
-	
+	   Toast.makeText(this,hmDBM.size() +  " renderizando en mapa..." + TABLE_NAME,Toast.LENGTH_LONG).show();
+	   
 	for(int i=0;i<hmDBM.size();i++){
 		
 		if(hmDBM.get(String.valueOf(i)).getDbms()<-80){
@@ -88,7 +92,7 @@ public class DeciMap extends Activity {
     // Move the camera instantly to hamburg with a zoom of 15.
     map.moveCamera(CameraUpdateFactory.newLatLngZoom(TOSANWICHO, 18));
     // Zoom in, animating the camera.
-    map.animateCamera(CameraUpdateFactory.zoomTo(18), 2000, null);
+    map.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
   }
 
 	@Override

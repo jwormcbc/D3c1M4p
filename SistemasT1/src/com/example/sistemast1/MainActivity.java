@@ -23,6 +23,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -50,6 +51,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +59,7 @@ import android.widget.Toast;
 public class MainActivity extends Activity implements Runnable,LocationListener{
 	TelephonyManager tm,tm2;
 	TextView tv1,tv2,tv2_2,tv3,tv4,tv5,tv6,tv7,tv8,tv9,tv10,tv11,uiState;
+	EditText et_DBName;
 	HashMap<String,String> gsmParams=new HashMap<String, String>();
 	boolean tActivo=false;
 	String phoneType = null;
@@ -65,7 +68,6 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 	int phoneTypeInt,dbmGSM;
 	int myLatitude, myLongitude;
 	OpenCellID openCellID;
-	private ProgressBar pb;
 	Button boton1,botonstop,botonDbMap;
 	String cid,lac,mcc,mnc;
 	double lat=0.0;
@@ -73,7 +75,14 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 	int IDCELL=0;
 	DeciMapSQLiteHelper usdbh ;
 	SQLiteDatabase db ;
-	static final String DB_NAME="DeciMapDB",TABLE_NAME="GeoDBM";
+	
+	//BD CONSTANTES
+	static final String DB_NAME="DeciMapDB";
+	String TABLE_NAME="GeoDBM";
+	/*
+	 * GeoDBM =  garciadiego casa
+	 * 
+	 */
 	
 	
 	
@@ -125,9 +134,7 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 	    
 	    usdbh = new DeciMapSQLiteHelper(MainActivity.this,DB_NAME, null, 1); //nombre de la base de datos :)
 		db = usdbh.getWritableDatabase();
-		/*db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);  //// WEYYY ESTO ES PARA QUE YA NO ELIMINES LA TABLA, YA TIENES LOS DATOS DE CARRANZA A LA CASA OOOKKKKK PARA QUE  NO TE APENDEJES.. YA LA TABLA NO SE ELIMINARA
-		db.execSQL("CREATE TABLE "+TABLE_NAME+" (id INTEGER, posicion TEXT,rssi TEXT,rssidbm TEXT,cellid TEXT,tipored TEXT,codearea TEXT)");
-	    Log.d("Out",TABLE_NAME+" reiniciada a 0  ");*/
+		
 		
 		  tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		  tm.listen(mPhoneListener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);// lo que querras escuchar man
@@ -169,8 +176,7 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 	       Log.d("Out","LAC : " + lac);
 		 
 		  
-	      pb=(ProgressBar)findViewById(R.id.pb1);
-	      pb.setVisibility(View.GONE);
+	     
 		  tv1=(TextView)findViewById(R.id.tv1);
 		  tv2=(TextView)findViewById(R.id.tv2);
 		  tv2_2=(TextView)findViewById(R.id.tv2_2);
@@ -183,6 +189,7 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 		  tv9=(TextView)findViewById(R.id.tv9);
 		  tv10=(TextView)findViewById(R.id.tv10);
 		  tv11=(TextView)findViewById(R.id.tv11);
+		  et_DBName=(EditText)findViewById(R.id.eTDB_Name);
 		  uiState=(TextView)findViewById(R.id.uiState);
 		  boton1=(Button)findViewById(R.id.button1);
 		  botonstop=(Button)findViewById(R.id.button2);
@@ -210,7 +217,12 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					
+
+					TABLE_NAME=et_DBName.getText().toString();
 					if(tActivo){
+
+						Toast.makeText(getApplicationContext(), "registro="+TABLE_NAME + "  DETENIDO..", Toast.LENGTH_LONG).show();
 						tActivo=false;
 						uiState.setText("detenido");
 						uiState.setTextColor(Color.RED);
@@ -218,12 +230,21 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 						botonstop.setText("hilo.start");
 						
 					}else{
+						
+						if(et_DBName.getText().length()>0  && et_DBName!=null){
 						tActivo=true;
+						Toast.makeText(getApplicationContext(), "registro="+TABLE_NAME + "  capturando datos...", Toast.LENGTH_LONG).show();
 						new Thread(MainActivity.this).start();
 						uiState.setText("running");
 						uiState.setTextColor(Color.GREEN);
 						botonstop.setTextColor(Color.RED);
 						botonstop.setText("hilo.stop");
+						}else{
+							
+							   Toast.makeText(getApplicationContext(), "ELIGE NOMBRE PARA EL REGISTRO!",Toast.LENGTH_LONG).show();
+							   
+						}
+						
 					}
 					
 				}
@@ -233,8 +254,16 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-					  Intent runDeciMap = new Intent(MainActivity.this, DeciMap.class);
-			          startActivity(runDeciMap);
+
+					if(et_DBName.getText().length()>0  && et_DBName!=null)
+					TABLE_NAME=et_DBName.getText().toString();
+					
+			          Intent intent = new Intent(MainActivity.this,DeciMap.class);
+						//startActivity(intent);
+						   intent.putExtra("tabla",TABLE_NAME);
+						   final int result=1;
+						   startActivityForResult(intent, result);
+			          
 			          return;
 					
 				}
@@ -481,15 +510,16 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 		 public void dataBaseTransacciones(){
 
 		        
-		      
+			db.execSQL("CREATE TABLE IF NOT EXISTS "+TABLE_NAME+" (id INTEGER, posicion TEXT,rssi TEXT,rssidbm TEXT,cellid TEXT,tipored TEXT,codearea TEXT)");
+			Log.d("Out",TABLE_NAME+" Creada si no existe  ");		      
 		    
   
-/*if(db != null)
+if(db != null)
 db.execSQL("INSERT INTO "+TABLE_NAME+" (id,posicion,rssi,rssidbm,cellid,tipored,codearea) VALUES ("+IDCELL+", '" + lat+","+lng +"','"+ gsmParams.get("gsmsignalstrength")+"'," +
-																												  "'"+gsmParams.get("dbmgsm")+"'," +
+																												  "'"+String.valueOf(rssiToDBM(Integer.parseInt(gsmParams.get("gsmsignalstrength").split(":")[1].replace(' ','0'))))+"'," +
 																												  "'"+cellLocationGSM.getCid()+"'," +
 																												  "'"+gsmParams.get("tipo")+"'," +
-																												  "'"+cellLocationGSM.getLac()+"')");*/
+																												  "'"+cellLocationGSM.getLac()+"')");
       
 ContentValues cv = new ContentValues();
 				 
@@ -510,7 +540,6 @@ Cursor c=db.query(TABLE_NAME,null,null,null,null,null,null);
 					String tipored=c.getString(5);
 					String codearea=c.getString(6);
 					Log.d("Out","id -> " + String.valueOf(id)  + " |   pos -> " + pos + " |  rssi ->  " + rssi + " |  rssidbm ->  " + rssidbm + " |   cellid -> " + cellid + " |  tipored ->  " + tipored + " | codearea -> "+codearea) ;
-				
 				}while(c.moveToNext());
 			
 			IDCELL++;
@@ -523,7 +552,7 @@ Cursor c=db.query(TABLE_NAME,null,null,null,null,null,null);
 			 
 			 while(tActivo) 
 			    	try{
-			    		Thread.sleep(2000);
+			    		Thread.sleep(10000);
 			    		refreshOtrosValores();
 			    		dataBaseTransacciones();
 			    		
@@ -658,11 +687,11 @@ Cursor c=db.query(TABLE_NAME,null,null,null,null,null,null);
 			}
 			 
 			protected void onPostExecute(Double result){
-				pb.setVisibility(View.GONE);
+				//pb.setVisibility(View.GONE);
 				Toast.makeText(getApplicationContext(), "command sent", Toast.LENGTH_LONG).show();
 }
 			protected void onProgressUpdate(Integer... progress){
-		    pb.setProgress(progress[0]);
+		    //pb.setProgress(progress[0]);
 			Log.d("Out","progreso segun  -- - - - -   " + String.valueOf(progress[0]));
 			}
 			 
