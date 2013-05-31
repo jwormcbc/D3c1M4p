@@ -1,5 +1,5 @@
 /** Automatically generated file. DO NOT MODIFY */
-package com.example.sistemast1;
+package com.bitcoreit.sistemast1;
 
 public final class BuildConfig {
     public final static boolean DEBUG = true;

@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.sistemast1;
+package com.bitcoreit.sistemast1;
 
 public final class R {
     public static final class attr {
@@ -289,20 +289,20 @@ containing a value of this type.
            <colgroup align="left" />
            <colgroup align="left" />
            <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #MapAttrs_cameraBearing com.example.sistemast1:cameraBearing}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_cameraTargetLat com.example.sistemast1:cameraTargetLat}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_cameraTargetLng com.example.sistemast1:cameraTargetLng}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_cameraTilt com.example.sistemast1:cameraTilt}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_cameraZoom com.example.sistemast1:cameraZoom}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_mapType com.example.sistemast1:mapType}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiCompass com.example.sistemast1:uiCompass}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiRotateGestures com.example.sistemast1:uiRotateGestures}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiScrollGestures com.example.sistemast1:uiScrollGestures}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiTiltGestures com.example.sistemast1:uiTiltGestures}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiZoomControls com.example.sistemast1:uiZoomControls}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_uiZoomGestures com.example.sistemast1:uiZoomGestures}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_useViewLifecycle com.example.sistemast1:useViewLifecycle}</code></td><td></td></tr>
-           <tr><td><code>{@link #MapAttrs_zOrderOnTop com.example.sistemast1:zOrderOnTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraBearing com.bitcoreit.sistemast1:cameraBearing}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTargetLat com.bitcoreit.sistemast1:cameraTargetLat}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTargetLng com.bitcoreit.sistemast1:cameraTargetLng}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraTilt com.bitcoreit.sistemast1:cameraTilt}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_cameraZoom com.bitcoreit.sistemast1:cameraZoom}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_mapType com.bitcoreit.sistemast1:mapType}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiCompass com.bitcoreit.sistemast1:uiCompass}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiRotateGestures com.bitcoreit.sistemast1:uiRotateGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiScrollGestures com.bitcoreit.sistemast1:uiScrollGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiTiltGestures com.bitcoreit.sistemast1:uiTiltGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiZoomControls com.bitcoreit.sistemast1:uiZoomControls}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_uiZoomGestures com.bitcoreit.sistemast1:uiZoomGestures}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_useViewLifecycle com.bitcoreit.sistemast1:useViewLifecycle}</code></td><td></td></tr>
+           <tr><td><code>{@link #MapAttrs_zOrderOnTop com.bitcoreit.sistemast1:zOrderOnTop}</code></td><td></td></tr>
            </table>
            @see #MapAttrs_cameraBearing
            @see #MapAttrs_cameraTargetLat
@@ -326,7 +326,7 @@ containing a value of this type.
             0x7f01000c, 0x7f01000d
         };
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#cameraBearing}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#cameraBearing}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -340,7 +340,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_cameraBearing = 1;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#cameraTargetLat}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#cameraTargetLat}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -354,7 +354,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_cameraTargetLat = 2;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#cameraTargetLng}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#cameraTargetLng}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -368,7 +368,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_cameraTargetLng = 3;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#cameraTilt}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#cameraTilt}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -382,7 +382,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_cameraTilt = 4;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#cameraZoom}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#cameraZoom}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -396,7 +396,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_cameraZoom = 5;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#mapType}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#mapType}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -416,7 +416,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_mapType = 0;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#uiCompass}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#uiCompass}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -430,7 +430,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiCompass = 6;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#uiRotateGestures}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#uiRotateGestures}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -444,7 +444,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiRotateGestures = 7;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#uiScrollGestures}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#uiScrollGestures}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -458,7 +458,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiScrollGestures = 8;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#uiTiltGestures}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#uiTiltGestures}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -472,7 +472,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiTiltGestures = 9;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#uiZoomControls}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#uiZoomControls}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -486,7 +486,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiZoomControls = 10;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#uiZoomGestures}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#uiZoomGestures}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -500,7 +500,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_uiZoomGestures = 11;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#useViewLifecycle}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#useViewLifecycle}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 
@@ -514,7 +514,7 @@ containing a value of this type.
         */
         public static final int MapAttrs_useViewLifecycle = 12;
         /**
-          <p>This symbol is the offset where the {@link com.example.sistemast1.R.attr#zOrderOnTop}
+          <p>This symbol is the offset where the {@link com.bitcoreit.sistemast1.R.attr#zOrderOnTop}
           attribute's value can be found in the {@link #MapAttrs} array.
 
 

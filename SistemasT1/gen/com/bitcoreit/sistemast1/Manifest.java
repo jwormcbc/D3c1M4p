@@ -5,10 +5,10 @@
  * should not be modified by hand.
  */
 
-package com.example.sistemast1;
+package com.bitcoreit.sistemast1;
 
 public final class Manifest {
     public static final class permission {
-        public static final String MAPS_RECEIVE="com.example.sistemast1.permission.MAPS_RECEIVE";
+        public static final String MAPS_RECEIVE="com.bitcoreit.sistemast1.permission.MAPS_RECEIVE";
     }
 }

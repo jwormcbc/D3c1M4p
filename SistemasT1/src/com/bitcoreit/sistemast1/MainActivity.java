@@ -23,7 +23,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import com.example.sistemast1.R;
+import com.bitcoreit.sistemast1.R;
 
 
 import android.location.Criteria;

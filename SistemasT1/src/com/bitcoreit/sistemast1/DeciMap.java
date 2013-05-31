@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
-import com.example.sistemast1.R;
+import com.bitcoreit.sistemast1.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
