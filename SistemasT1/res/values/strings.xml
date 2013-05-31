@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">DBM Map</string>
+    <string name="app_name">DBMs Map</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_deci_map">DBM Map</string>
-    <string name="title_activity_splash_inicio">DBM Map</string>
+    <string name="title_activity_deci_map">DBMs Map</string>
+    <string name="title_activity_splash_inicio">DBMs Map</string>
 
 </resources>
