@@ -42,7 +42,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyD5p-CBgOLlOP2Nn-icpebbC5pgkr0jDYM" />
+            android:value="AIzaSyCbURiECBA2QOtmBnM6a98uPFd9OlRHwX0" />
 
         <activity
             android:name="com.bitcoreit.sistemast1.DeciMap"
