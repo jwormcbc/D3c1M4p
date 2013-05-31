@@ -1,4 +1,4 @@
-package com.example.sistemast1;
+package com.bitcoreit.sistemast1;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

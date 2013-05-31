@@ -1,4 +1,6 @@
-package com.example.sistemast1;
+package com.bitcoreit.sistemast1;
+
+import com.example.sistemast1.R;
 
 import android.app.Activity;
 import android.content.Intent;

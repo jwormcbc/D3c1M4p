@@ -1,4 +1,4 @@
-package com.example.sistemast1;
+package com.bitcoreit.sistemast1;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -22,6 +22,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+
+import com.example.sistemast1.R;
 
 
 import android.location.Criteria;
