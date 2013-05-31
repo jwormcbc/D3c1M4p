@@ -31,12 +31,16 @@ import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract.PhoneticNameStyle;
+import android.provider.Settings;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.telephony.CellInfo;
 import android.telephony.CellLocation;
@@ -46,6 +50,7 @@ import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 import android.telephony.cdma.CdmaCellLocation;
 import android.telephony.gsm.GsmCellLocation;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -75,6 +80,8 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 	int IDCELL=0;
 	DeciMapSQLiteHelper usdbh ;
 	SQLiteDatabase db ;
+	boolean gpssn=false;
+	Cursor c;
 	
 	//BD CONSTANTES
 	static final String DB_NAME="DeciMapDB";
@@ -97,8 +104,6 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
-		
 		/*
 		 * GPS inicio
 		 */
@@ -119,11 +124,25 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 	    if (location != null) {
 	     Log.d("Out","provider   " + provider + " has been selected.");
 	      onLocationChanged(location);
+	      gpssn=true;
 	    } else {
-	      latituteField.setText("Location not available");
-	      longitudeField.setText("Location not available");
+	      latituteField.setText("Activa gps");
+	      longitudeField.setText("Activa gps");
+	      gpssn=false;
 	    }
 		
+	    
+		final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("GPS!");
+        builder.setMessage(" Se Recomienda antes de abrir la app, Encender el GPS. Suerte ");
+        builder.setPositiveButton("OK!",new DialogInterface.OnClickListener() {
+    				public void onClick(DialogInterface dialog, int which) {
+    						// TODO Auto-generated method stub	
+    				finish();
+    				}});
+        if(!gpssn)
+        builder.show();
+	    
 		
 		/*
 		 * GPS final
@@ -134,7 +153,6 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 	    
 	    usdbh = new DeciMapSQLiteHelper(MainActivity.this,DB_NAME, null, 1); //nombre de la base de datos :)
 		db = usdbh.getWritableDatabase();
-		
 		
 		  tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		  tm.listen(mPhoneListener, PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);// lo que querras escuchar man
@@ -227,21 +245,40 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 						uiState.setText("detenido");
 						uiState.setTextColor(Color.RED);
 						botonstop.setTextColor(Color.GREEN);
-						botonstop.setText("hilo.start");
+						botonstop.setText("Inicio");
+						botonDbMap.setTextColor(Color.BLUE);
+						botonDbMap.setEnabled(true);
 						
 					}else{
 						
 						if(et_DBName.getText().length()>0  && et_DBName!=null){
 						tActivo=true;
-						Toast.makeText(getApplicationContext(), "registro="+TABLE_NAME + "  capturando datos...", Toast.LENGTH_LONG).show();
+						try{
+						c=db.query(TABLE_NAME,null,null,null,null,null,null);
+						IDCELL=c.getCount();
+						Toast.makeText(getApplicationContext(), "registro="+TABLE_NAME + "  AGREGANDO datos...", Toast.LENGTH_LONG).show();
 						new Thread(MainActivity.this).start();
 						uiState.setText("running");
 						uiState.setTextColor(Color.GREEN);
 						botonstop.setTextColor(Color.RED);
-						botonstop.setText("hilo.stop");
+						botonstop.setText("Detener");
+						botonDbMap.setTextColor(Color.RED);
+						botonDbMap.setEnabled(false);
+						}catch(SQLiteException e){
+							Toast.makeText(getApplicationContext(), "registro ="+TABLE_NAME + "  NUEVOS  datos...", Toast.LENGTH_LONG).show();
+							new Thread(MainActivity.this).start();
+							uiState.setText("running");
+							uiState.setTextColor(Color.GREEN);
+							botonstop.setTextColor(Color.RED);
+							botonstop.setText("Detener");
+							botonDbMap.setTextColor(Color.RED);
+							botonDbMap.setEnabled(false);
+						}
+						
+					
 						}else{
 							
-							   Toast.makeText(getApplicationContext(), "ELIGE NOMBRE PARA EL REGISTRO!",Toast.LENGTH_LONG).show();
+							   Toast.makeText(getApplicationContext(),Html.fromHtml("<b><font color=\"red\" >"+"ELIGE NOMBRE PARA EL REGISTRO!</font></b>"),Toast.LENGTH_LONG).show();
 							   
 						}
 						
@@ -255,15 +292,28 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 
-					if(et_DBName.getText().length()>0  && et_DBName!=null)
+					if(et_DBName.getText().length()>0  && et_DBName!=null){
 					TABLE_NAME=et_DBName.getText().toString();
-					
-			          Intent intent = new Intent(MainActivity.this,DeciMap.class);
+			        Intent intent = new Intent(MainActivity.this,DeciMap.class);
+						try{
+							c=db.query(TABLE_NAME,null,null,null,null,null,null);
 						//startActivity(intent);
 						   intent.putExtra("tabla",TABLE_NAME);
 						   final int result=1;
 						   startActivityForResult(intent, result);
+						   MainActivity.this.finish();
+						
+						}catch(SQLiteException e){
+							Toast.makeText(getApplicationContext(), "No Existe el  REGISTRO! " + TABLE_NAME,Toast.LENGTH_LONG).show();
+						
+						}
+					}else{
+						  Toast.makeText(getApplicationContext(), Html.fromHtml("<b><font color=\"red\" >"+"ELIGE NOMBRE PARA EL REGISTRO!</font></b>"),Toast.LENGTH_LONG).show();
+					}
 			          
+						
+						   
+						   
 			          return;
 					
 				}
@@ -310,8 +360,6 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 	   e.printStackTrace();
 	   Log.d("Out","REEEEChinga u Puta madre : Error" + e.toString());
 	  }*/
-	
-		  
 		  //new Thread(this).start();
 		 }
 
@@ -523,7 +571,8 @@ db.execSQL("INSERT INTO "+TABLE_NAME+" (id,posicion,rssi,rssidbm,cellid,tipored,
       
 ContentValues cv = new ContentValues();
 				 
-Cursor c=db.query(TABLE_NAME,null,null,null,null,null,null);
+c=db.query(TABLE_NAME,null,null,null,null,null,null);
+
 			if(c.moveToFirst())
 				do{
 					int id=c.getInt(0);
@@ -757,15 +806,58 @@ Cursor c=db.query(TABLE_NAME,null,null,null,null,null,null);
 
 	  @Override
 	  public void onProviderEnabled(String provider) {
-	    Toast.makeText(this, "Enabled new provider " + provider,
+	    Toast.makeText(this, "GPS habilitado -->>  " + provider,
 	        Toast.LENGTH_SHORT).show();
 
+	    latituteField.setTextColor(Color.BLUE);	 
+	    longitudeField.setTextColor(Color.BLUE);
+	    latituteField.setText("Obteniendo posicion ..");
+	    longitudeField.setText("Obteniendo posicion ..");
+	    
 	  }
 
 	  @Override
 	  public void onProviderDisabled(String provider) {
-	    Toast.makeText(this, "Disabled provider " + provider,
+		  
+	    Toast.makeText(this, " GPS desabilitado " + provider,
 	        Toast.LENGTH_SHORT).show();
+	    latituteField.setTextColor(Color.RED);	 
+	    longitudeField.setTextColor(Color.RED);
+	    latituteField.setText("Activa gps");
+	    longitudeField.setText("Activa gps");
+	  }
+	  
+	  @Override
+	  public void onBackPressed(){
+		  final AlertDialog.Builder builder=new AlertDialog.Builder(this);
+	        builder.setTitle("Salir");
+	        builder.setMessage(" Se detendran los procesos corriendo de captura. seguro? ");
+	        builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+	        
+	        builder.setPositiveButton("Proceder",new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+						// TODO Auto-generated method stub
+					tActivo=false;
+					uiState.setText("detenido");
+					uiState.setTextColor(Color.RED);
+					botonstop.setTextColor(Color.GREEN);
+					botonstop.setText("Inicio");
+					botonDbMap.setTextColor(Color.GREEN);
+					botonDbMap.setEnabled(false);
+					finish();
+				}});
+				 
+				 
+				 builder.setNegativeButton("Cancelar",new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+							return;
+						}});
+				
+					builder.show();
+
+		  
 	  }
 	 
 	 

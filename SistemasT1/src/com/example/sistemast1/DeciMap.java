@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -65,21 +67,82 @@ public class DeciMap extends Activity {
 	
 	   Toast.makeText(this,hmDBM.size() +  " renderizando en mapa..." + TABLE_NAME,Toast.LENGTH_LONG).show();
 	   
+	   
+	   /*
+	    * RENDERIZA POR DECIBELES METRO COMO PARAMETRO DE CAMBIO DE MARKER
+	    */
 	for(int i=0;i<hmDBM.size();i++){
 		
-		if(hmDBM.get(String.valueOf(i)).getDbms()<-80){
+		if(hmDBM.get(String.valueOf(i)).getDbms()<-100){
 		map.addMarker(new MarkerOptions().position(new LatLng(hmDBM.get(String.valueOf(i)).getLat(),hmDBM.get(String.valueOf(i)).getLon()))
 		        .title(String.valueOf(hmDBM.get(String.valueOf(i)).getDbms()) + "  Dbms")
                 .snippet("Id antena: " + hmDBM.get(String.valueOf(i)).getCellid())
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
-		}else if(hmDBM.get(String.valueOf(i)).getDbms()>=-80){
+		}else if(hmDBM.get(String.valueOf(i)).getDbms()>=-100){
 			map.addMarker(new MarkerOptions().position(new LatLng(hmDBM.get(String.valueOf(i)).getLat(),hmDBM.get(String.valueOf(i)).getLon()))
 			        .title(String.valueOf(hmDBM.get(String.valueOf(i)).getDbms()) + "  Dbms")
 	                .snippet("Id antena: " + hmDBM.get(String.valueOf(i)).getCellid())
 	                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)));
+		}else if(hmDBM.get(String.valueOf(i)).getDbms()>=-90){
+			map.addMarker(new MarkerOptions().position(new LatLng(hmDBM.get(String.valueOf(i)).getLat(),hmDBM.get(String.valueOf(i)).getLon()))
+			        .title(String.valueOf(hmDBM.get(String.valueOf(i)).getDbms()) + "  Dbms")
+	                .snippet("Id antena: " + hmDBM.get(String.valueOf(i)).getCellid())
+	                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+		}else if(hmDBM.get(String.valueOf(i)).getDbms()>=-80){
+			map.addMarker(new MarkerOptions().position(new LatLng(hmDBM.get(String.valueOf(i)).getLat(),hmDBM.get(String.valueOf(i)).getLon()))
+			        .title(String.valueOf(hmDBM.get(String.valueOf(i)).getDbms()) + "  Dbms")
+	                .snippet("Id antena: " + hmDBM.get(String.valueOf(i)).getCellid())
+	                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+		}else if(hmDBM.get(String.valueOf(i)).getDbms()>=-70){
+			map.addMarker(new MarkerOptions().position(new LatLng(hmDBM.get(String.valueOf(i)).getLat(),hmDBM.get(String.valueOf(i)).getLon()))
+			        .title(String.valueOf(hmDBM.get(String.valueOf(i)).getDbms()) + "  Dbms")
+	                .snippet("Id antena: " + hmDBM.get(String.valueOf(i)).getCellid())
+	                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)));
+		}else if(hmDBM.get(String.valueOf(i)).getDbms()>=-60){
+			map.addMarker(new MarkerOptions().position(new LatLng(hmDBM.get(String.valueOf(i)).getLat(),hmDBM.get(String.valueOf(i)).getLon()))
+			        .title(String.valueOf(hmDBM.get(String.valueOf(i)).getDbms()) + "  Dbms")
+	                .snippet("Id antena: " + hmDBM.get(String.valueOf(i)).getCellid())
+	                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
 		}
-
+	}
 		
+		
+		
+		   /*
+		    * RENDERIZA POR ID CELL COMO PARAMETRO DE CAMBIO DE MARKER
+		    */
+	String celdaChange="ninguno";
+		for(int ii=0;ii<hmDBM.size();ii++){
+			
+			if(!celdaChange.equals(hmDBM.get(String.valueOf(ii)).getCellid().toString()))
+			{
+			
+				if(celdaChange.equals("ninguno")){
+				Log.d("Out","circle inicio");
+				map.addCircle(new CircleOptions()
+			     .center(new LatLng(hmDBM.get(String.valueOf(ii)).getLat(),hmDBM.get(String.valueOf(ii)).getLon()))
+			     .radius(10)
+			     .fillColor(Color.GREEN));
+				}else if(ii == hmDBM.size()-1){
+					Log.d("Out","circle final");
+					map.addCircle(new CircleOptions()
+				     .center(new LatLng(hmDBM.get(String.valueOf(ii)).getLat(),hmDBM.get(String.valueOf(ii)).getLon()))
+				     .radius(10)
+				     .fillColor(Color.RED));
+				}else{
+					Log.d("Out","circle handoff");
+					map.addCircle(new CircleOptions()
+				     .center(new LatLng(hmDBM.get(String.valueOf(ii)).getLat(),hmDBM.get(String.valueOf(ii)).getLon()))
+				     .radius(10)
+				     .fillColor(Color.RED));
+				}
+					
+				
+				
+				
+				celdaChange=hmDBM.get(String.valueOf(ii)).getCellid();
+			
+			}
 	}
 	
 	
@@ -100,6 +163,13 @@ public class DeciMap extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.deci_map, menu);
 		return true;
+	}
+	
+	@Override
+	public void onBackPressed(){
+		Intent i=new Intent(DeciMap.this,MainActivity.class);
+		startActivity(i);
+		this.finish();
 	}
 
 }
@@ -150,6 +220,6 @@ class DBMpoint{
 		this.dbms=Integer.parseInt(rssidbm);
 		this.cellid=cellid;
 	}
-	
-	
+
+
 }
