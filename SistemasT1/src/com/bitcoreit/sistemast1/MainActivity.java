@@ -140,7 +140,6 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
         builder.setPositiveButton("OK!",new DialogInterface.OnClickListener() {
     				public void onClick(DialogInterface dialog, int which) {
     						// TODO Auto-generated method stub	
-    				finish();
     				}});
         if(!gpssn)
         builder.show();
