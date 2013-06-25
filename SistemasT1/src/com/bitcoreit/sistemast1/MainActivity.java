@@ -218,15 +218,7 @@ public class MainActivity extends Activity implements Runnable,LocationListener{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				//new OpenCellID().execute("lalalalalalal");	Funciona bien llama a un servicio externo pero no tiene la info que necesitamos
-			
-			        
-			        
-			        
-			        
-				
-			
-				
-	            
+			   
 	            
 			}
 		});
